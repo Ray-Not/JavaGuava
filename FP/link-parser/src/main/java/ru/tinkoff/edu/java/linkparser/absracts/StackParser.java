@@ -10,5 +10,5 @@ public class StackParser extends AbstractParser {
         if (link_list.length > 3 && Objects.equals(link_list[2], "stackoverflow.com"))
             if (Objects.equals(link_list[3], "questions")) return link_list[4];
         return "";
-    } 
+    }
 }
