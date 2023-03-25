@@ -8,6 +8,7 @@ public class LinkParserDemo {
 
         String link = "https://github.com/sanyarnd/tinkoff-java-course-2022/";
         String link2 = "https://stackoverflow.com/questions/1642028/what-is-the-operator-in-c";
+        String link3 = "https://stackoverflow.com/search?q=unsupported%20link";
 
         AbstractParser gitParser = new GitParser();
         AbstractParser stackParser = new StackParser();
@@ -16,7 +17,6 @@ public class LinkParserDemo {
         gitParser.setNextParser(stackParser);
         stackParser.setNextParser(otherParser);
 
-        gitParser.logParser (link2);
-        gitParser.logParser (link);
+        System.out.println(gitParser.logParser(link3));
     }
 }

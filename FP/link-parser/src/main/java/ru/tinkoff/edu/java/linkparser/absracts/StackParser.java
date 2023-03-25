@@ -5,10 +5,14 @@ import java.util.Objects;
 public class StackParser extends AbstractParser {
 
     @Override
-    protected String parsAbstract (String link) {
-        String[] link_list = link.split("/");
-        if (link_list.length > 3 && Objects.equals(link_list[2], "stackoverflow.com"))
-            if (Objects.equals(link_list[3], "questions")) return link_list[4];
-        return "";
+    protected String parsAbstract(String link) {
+
+        String[] parsed = link.split("/");
+
+        if (!Objects.equals(parsed[2], "stackoverflow.com")) return null;
+
+        if (parsed.length > 4) return parsed[4];
+
+        return null;
     }
 }

@@ -5,11 +5,14 @@ import java.util.Objects;
 public class GitParser extends AbstractParser {
 
     @Override
-    protected String parsAbstract (String link) {
-        String[] link_list = link.split("/");
-        if (link_list.length > 4 && Objects.equals(link_list[2], "github.com")) {
-            return link_list[3] + " " + link_list[4];
-        }
-        return "";
+    protected String parsAbstract(String link) {
+
+        String[] parsed = link.split("/");
+
+        if(!Objects.equals(parsed[2], "github.com")) return null;
+
+        if (parsed.length > 4) return parsed[3] + " " + parsed[4];
+
+        return null;
     }
 }
