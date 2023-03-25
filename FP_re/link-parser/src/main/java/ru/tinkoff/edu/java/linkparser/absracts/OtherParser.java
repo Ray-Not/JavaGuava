@@ -4,6 +4,6 @@ public class OtherParser extends AbstractParser {
 
     @Override
     protected String parsAbstract(String link) {
-        return "Ссылка не поддерживается";
+        return null;
     }
 }

@@ -11,9 +11,8 @@ public abstract class AbstractParser {
     public String logParser (String link) {
         if(nextParser != null) {
             if(this.parsAbstract(link) == null) return nextParser.logParser(link);
-            return this.parsAbstract(link);
         }
-        return null;
+        return this.parsAbstract(link);
     }
 
     abstract protected String parsAbstract(String link);

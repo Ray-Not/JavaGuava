@@ -17,6 +17,6 @@ public class LinkParserDemo {
         gitParser.setNextParser(stackParser);
         stackParser.setNextParser(otherParser);
 
-        System.out.println(gitParser.logParser(link3));
+        System.out.println(gitParser.logParser(link));
     }
 }
