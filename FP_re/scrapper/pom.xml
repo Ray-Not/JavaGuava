@@ -56,5 +56,20 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--Link parser-->
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>link-parser</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--Link parser-->
+        <!--Client-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webflux</artifactId>
+            <version>6.0.6</version>
+        </dependency>
+        <!--Client-->
     </dependencies>
 </project>
