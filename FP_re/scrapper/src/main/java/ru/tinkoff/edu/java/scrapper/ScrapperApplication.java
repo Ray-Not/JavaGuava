@@ -3,17 +3,22 @@ package ru.tinkoff.edu.java.scrapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import ru.tinkoff.edu.java.linkparser.LinkParser;
+import ru.tinkoff.edu.java.scrapper.client.ClientConfiguration;
 import ru.tinkoff.edu.java.scrapper.configuration.ApplicationConfig;
 
 @SpringBootApplication
 @EnableConfigurationProperties(ApplicationConfig.class)
 public class ScrapperApplication {
 public static void main(String[] args) {
+
+        String gitUrl = new String("https://api.github.com/repos/Ray-Not/JavaGuava");
+
         var ctx = SpringApplication.run(ScrapperApplication.class, args);
         ApplicationConfig config = ctx.getBean(ApplicationConfig.class);
-        LinkParser pars = new LinkParser();
-        System.out.println(pars.getLink("https://github.com/sanyarnd/tinkoff-java-course-2022/"));
+        System.out.println("----------------------------------------------------------------");
+        ClientConfiguration cls = ctx.getBean(ClientConfiguration.class);
+        System.out.println(cls.weatherClient());
+        System.out.println(cls.gitHubClient());
+        System.out.println(cls.stackOverflowClient());
         }
 }

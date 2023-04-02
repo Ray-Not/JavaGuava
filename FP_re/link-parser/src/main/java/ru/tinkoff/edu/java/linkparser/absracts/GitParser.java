@@ -11,7 +11,7 @@ public class GitParser extends AbstractParser {
 
         if(!Objects.equals(parsed[2], "github.com")) return null;
 
-        if (parsed.length > 4) return parsed[3] + " " + parsed[4];
+        if (parsed.length > 4) return parsed[3] + "/" + parsed[4];
 
         return null;
     }
