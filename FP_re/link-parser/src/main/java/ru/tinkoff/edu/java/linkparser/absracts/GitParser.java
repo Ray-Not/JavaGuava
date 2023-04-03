@@ -9,7 +9,9 @@ public class GitParser extends AbstractParser {
 
         String[] parsed = link.split("/");
 
-        if(!Objects.equals(parsed[2], "github.com")) return null;
+        if (parsed.length < 2) return null;
+
+        if (!Objects.equals(parsed[2], "github.com")) return null;
 
         if (parsed.length > 4) return parsed[3] + "/" + parsed[4];
 
