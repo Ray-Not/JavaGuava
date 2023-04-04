@@ -61,5 +61,19 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--Для бота-->
+        <dependency>
+            <groupId>com.github.pengrad</groupId>
+            <artifactId>java-telegram-bot-api</artifactId>
+            <version>6.6.0</version>
+        </dependency>
+        <!--Для бота-->
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>scrapper</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--Для бота-->
     </dependencies>
 </project>
