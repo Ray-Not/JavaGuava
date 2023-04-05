@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.bot.schedule;
+package ru.tinkoff.edu.java.bot.configuration.configRecords;
 
 import java.time.Duration;
 
