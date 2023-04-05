@@ -1,17 +1,24 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.tinkoff.edu.java.bot.firstBot.DB;
-import ru.tinkoff.edu.java.bot.firstBot.commands.List;
+import ru.tinkoff.edu.java.bot.firstBot.MessageHandler;
 
 
-public class BotTest implements List {
+public class BotTest {
 
     String except_empty_list = "list пустой";
+    String except_unknow_command = "<b>Неизвестная команда</b>";
+    MessageHandler handler = new MessageHandler();
 
     @Test
     public void listTest() {
-        Assertions.assertEquals(list(), except_empty_list);
+        Assertions.assertEquals(handler.call_command("/list"), except_empty_list);
         DB.addLink("link");
-        Assertions.assertNotEquals(list(), except_empty_list);
+        Assertions.assertNotEquals(handler.call_command("/list"), except_empty_list);
+    }
+
+    @Test
+    public void unknowCommandAndFormatTest() {
+        Assertions.assertEquals(handler.call_command("/uno"), except_unknow_command);
     }
 }
