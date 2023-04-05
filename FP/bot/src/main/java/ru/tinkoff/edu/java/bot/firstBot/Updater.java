@@ -6,7 +6,6 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.*;
 import com.pengrad.telegrambot.request.SendMessage;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Updater implements UpdatesListener {
@@ -25,14 +24,14 @@ public class Updater implements UpdatesListener {
         if(handler.is_command(update.message().text())) {
             String[] parse = update.message().text().split(" ");
             if(parse.length > 1) command = handler.call_command(parse[0], parse[1]);
-            else command = handler.call_command(parse[0], null);
+            else command = handler.call_command(parse[0]);
             bot.execute(
                     new SendMessage(update.message().chat().id(), command)
                             .replyMarkup(new ReplyKeyboardMarkup(new String[][]{
                                 {"/start", "/help"},
                                 {"/track testlink", "/untrack testlink", "/list"}
                             }).resizeKeyboard(true)
-                            )
+                            ).parseMode(ParseMode.HTML)
                     );
         }
         return UpdatesListener.CONFIRMED_UPDATES_ALL;

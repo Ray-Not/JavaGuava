@@ -7,7 +7,7 @@ public interface Untrack {
         if(link.equals("")) return "ведите ссылку";
         if(DB.linkContain(link)) {
             DB.rmLink(link);
-            return "ссылка " + link + " удалена";
+            return "ссылка <b>" + link + "</b> удалена";
         }
         return "ссылки " + link + " нет в пуле";
     }

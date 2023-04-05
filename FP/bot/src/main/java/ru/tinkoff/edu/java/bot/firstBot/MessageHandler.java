@@ -18,4 +18,13 @@ public class MessageHandler extends All {
             default -> unknow();
         };
     }
+
+    public String call_command(String command) {
+        return switch (command) {
+            case "/start" -> start();
+            case "/help" -> help();
+            case "/list" -> list();
+            default -> unknow();
+        };
+    }
 }
