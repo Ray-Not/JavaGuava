@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.tinkoff.edu.java.bot.firstBot.BotMain;
+import ru.tinkoff.edu.java.bot.firstBot.DB;
 import ru.tinkoff.edu.java.scrapper.api.model.*;
 
 @RequestMapping("/links")
@@ -15,18 +17,20 @@ public class ScrapperControllerLink {
     public void linksDelete(
             @RequestHeader("Tg-Chat-Id") Long tgChatId,
             @RequestBody RemoveLinkRequest removeLinkRequest
-    ) {}
+    ) {
+        BotMain.apiCommand(tgChatId, "/untrack" + " " + removeLinkRequest.link());
+    }
 
     @GetMapping
-    public String linksGet(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-        return tgChatId + "";
+    public void linksGet(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
+        BotMain.apiCommand(tgChatId, "/list");
     }
 
     @PostMapping
-    public String linksPost(
+    public void linksPost(
             @RequestHeader("Tg-Chat-Id") Long tgChatId,
             @RequestBody AddLinkRequest addLinkRequest
     ) {
-        return addLinkRequest.link();
+        BotMain.apiCommand(tgChatId, "/track" + " " + addLinkRequest.link());
     }
 }

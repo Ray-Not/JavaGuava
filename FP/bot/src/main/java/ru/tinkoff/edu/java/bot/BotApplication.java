@@ -17,6 +17,5 @@ public class BotApplication
 
                 BotMain bot = new BotMain(config.bot().token());
                 bot.start();
-
         }
 }

@@ -9,11 +9,12 @@ public class ScrapperControllerTg {
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
-    public void tgChatIdDelete(@PathVariable Long id) {}
+    public void tgChatIdDelete(@PathVariable Long id) {
+        DB.addId(id);
+    }
 
     @PostMapping("/{id}")
-    public String tgChatIdPost(@PathVariable Long id) {
-        if(id < 0) return "Аргумент отрицательный";
-        return id + "";
+    public void tgChatIdPost(@PathVariable Long id) {
+        DB.rmId(id);
     }
 }
