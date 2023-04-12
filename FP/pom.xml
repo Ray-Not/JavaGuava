@@ -27,6 +27,7 @@
         <spring-cloud.version>2022.0.0</spring-cloud.version>
         <annotations.version>23.1.0</annotations.version>
         <test.version>5.8.1</test.version>
+        <testcontainers.version>1.18.0</testcontainers.version>
     </properties>
 
     <build>
@@ -102,6 +103,13 @@
                 <artifactId>annotations</artifactId>
                 <version>${annotations.version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
