@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-abstract class IntegrationEnvironment {
+public abstract class IntegrationEnvironment {
 
     static final protected PostgreSQLContainer Postgre_container;
 

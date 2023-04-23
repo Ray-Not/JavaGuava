@@ -6,12 +6,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tinkoff.edu.java.bot.firstBot.BotMain;
-import ru.tinkoff.edu.java.bot.firstBot.DB;
 import ru.tinkoff.edu.java.scrapper.api.model.*;
+import ru.tinkoff.edu.java.scrapper.jdbc.AddLink;
+import ru.tinkoff.edu.java.scrapper.jdbc.FindAllLink;
+import ru.tinkoff.edu.java.scrapper.jdbc.LinkHandler;
+import ru.tinkoff.edu.java.scrapper.jdbc.mappers.LinkMapper;
+
+import java.util.List;
 
 @RequestMapping("/links")
 @RestController
-public class ScrapperControllerLink {
+public class ScrapperControllerLink  extends LinkHandler {
     private final JdbcTemplate jdbcTemplate;
 
     public ScrapperControllerLink(JdbcTemplate jdbcTemplate) {
@@ -24,13 +29,14 @@ public class ScrapperControllerLink {
             @RequestHeader("Tg-Chat-Id") Long tgChatId,
             @RequestBody RemoveLinkRequest removeLinkRequest
     ) {
-        BotMain.apiCommand(tgChatId, "/untrack" + " " + removeLinkRequest.link());
-        jdbcTemplate.update("DELETE FROM links WHERE link=?", removeLinkRequest.link());
+//        BotMain.apiCommand(tgChatId, "/untrack" + " " + removeLinkRequest.link());
+        removeLink(jdbcTemplate);
     }
 
     @GetMapping
-    public void linksGet(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-        BotMain.apiCommand(tgChatId, "/list");
+    public List<LinkResponse> linksGet(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
+//        BotMain.apiCommand(tgChatId, "/list");
+        return findAllLink(jdbcTemplate);
     }
 
     @PostMapping
@@ -39,8 +45,6 @@ public class ScrapperControllerLink {
             @RequestBody AddLinkRequest addLinkRequest
     ) {
 //        BotMain.apiCommand(tgChatId, "/track" + " " + addLinkRequest.link());
-        jdbcTemplate.update("INSERT INTO links VALUES(1, ?)", addLinkRequest.link());
-        jdbcTemplate.update("INSERT INTO tgchats VALUES(1, ?)", tgChatId);
-        jdbcTemplate.update("INSERT INTO links_tgchats VALUES(1, 1)");
+        addLink(jdbcTemplate, addLinkRequest, tgChatId);
     }
 }

@@ -47,20 +47,20 @@ public class ClientConfiguration {
         return gitHubResponse;
     }
 
-    @Bean
-    public StackOverflowRecord stackOverflowClient() {
-
-
-        if(Objects.equals(stackLink, "")) stackLink = BASE_STACK_URL;
-
-        String params = "?order=desc&sort=activity&site=stackoverflow";
-        stackLink = pars.getLink(stackLink);
-        StackOverflowRecord stackOverflowResponse = builder.build()
-                .get()
-                .uri("https://api.stackexchange.com/2.3/questions/" + stackLink + params)
-                .retrieve()
-                .bodyToMono(StackOverflowRecord.class)
-                .block();
-        return stackOverflowResponse;
-    }
+//    @Bean
+//    public StackOverflowRecord stackOverflowClient() {
+//
+//
+//        if(Objects.equals(stackLink, "")) stackLink = BASE_STACK_URL;
+//
+//        String params = "?order=desc&sort=activity&site=stackoverflow";
+//        stackLink = pars.getLink(stackLink);
+//        StackOverflowRecord stackOverflowResponse = builder.build()
+//                .get()
+//                .uri("https://api.stackexchange.com/2.3/questions/" + stackLink + params)
+//                .retrieve()
+//                .bodyToMono(StackOverflowRecord.class)
+//                .block();
+//        return stackOverflowResponse;
+//    }
 }
