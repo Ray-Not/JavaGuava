@@ -9,12 +9,11 @@ public class StackParser extends AbstractParser {
 
         String[] parsed = link.split("/");
 
+        if (parsed.length < 5) return null;
         if (!Objects.equals(parsed[2], "stackoverflow.com")) return null;
         if (!Objects.equals(parsed[3], "questions")) return null;
 
 
-        if (parsed.length > 4) return parsed[4];
-
-        return null;
+        return parsed[4];
     }
 }
