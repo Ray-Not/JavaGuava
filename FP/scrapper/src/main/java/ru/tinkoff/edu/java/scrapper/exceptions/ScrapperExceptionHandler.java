@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.EntryExsistException;
 import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.NullLinkException;
+import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.UnauthorizationException;
 import ru.tinkoff.edu.java.scrapper.exceptions.model.ApiErrorResponse;
 
 @RestControllerAdvice
@@ -52,6 +54,18 @@ public class ScrapperExceptionHandler {
     @ExceptionHandler(NullLinkException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrorResponse NullLink(NullLinkException e) {
+        return setException(e);
+    }
+
+    @ExceptionHandler(UnauthorizationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ApiErrorResponse Unauthorization(UnauthorizationException e) {
+        return setException(e);
+    }
+
+    @ExceptionHandler(EntryExsistException.class)
+    @ResponseStatus(HttpStatus.FOUND)
+    public ApiErrorResponse EntryExsist(EntryExsistException e) {
         return setException(e);
     }
 }

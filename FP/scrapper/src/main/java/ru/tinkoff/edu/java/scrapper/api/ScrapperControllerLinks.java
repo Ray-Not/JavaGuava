@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.tinkoff.edu.java.scrapper.api.model.*;
-import ru.tinkoff.edu.java.scrapper.jdbc.JdbcAddLink;
+import ru.tinkoff.edu.java.scrapper.jdbc.JdbcLinkService;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public class ScrapperControllerLinks {
             @RequestHeader("Tg-Chat-Id") Long tgChatId,
             @RequestBody AddLinkRequest addLinkRequest
     ) {
-        JdbcAddLink addService = new JdbcAddLink();
-        addService.addLinkService(jdbcTemplate, addLinkRequest, tgChatId);
+        JdbcLinkService addService = new JdbcLinkService();
+        addService.addLink(jdbcTemplate, addLinkRequest, tgChatId);
     }
 }
