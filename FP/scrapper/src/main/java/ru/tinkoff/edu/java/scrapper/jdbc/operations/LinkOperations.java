@@ -3,10 +3,12 @@ package ru.tinkoff.edu.java.scrapper.jdbc.operations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import ru.tinkoff.edu.java.scrapper.api.model.AddLinkRequest;
 import ru.tinkoff.edu.java.scrapper.api.model.LinkResponse;
-import ru.tinkoff.edu.java.scrapper.api.model.ListLinksResponse;
 import ru.tinkoff.edu.java.scrapper.api.model.RemoveLinkRequest;
-import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.EntryNotExsistException;
 import ru.tinkoff.edu.java.scrapper.jdbc.mappers.LinkMapper;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public interface LinkOperations {
     default void i_addLink(
@@ -36,10 +38,23 @@ public interface LinkOperations {
         jdbcTemplate.update(query);
     }
 
-    default void i_findAllLink(
+    default List<LinkResponse> i_findAllLink(
             JdbcTemplate jdbcTemplate,
-            ListLinksResponse listLinksResponse
-    ){}
+            ArrayList<Integer> links_ids
+    ){
+        try {
+            String ids = Arrays.toString(links_ids.toArray());
+            ids = ids.substring(1, ids.length() - 1);
+            String query = "SELECT * FROM links WHERE id IN (%s)";
+            query = query.formatted(ids);
+            return jdbcTemplate.query(
+                    query,
+                    new LinkMapper()
+            );
+        } catch (IndexOutOfBoundsException e) { // Если значение не нашлось
+            return null;
+        }
+    }
 
     default int i_findLink(
             JdbcTemplate jdbcTemplate,

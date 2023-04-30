@@ -4,7 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import ru.tinkoff.edu.java.scrapper.api.model.LinkChatResponse;
 import ru.tinkoff.edu.java.scrapper.jdbc.mappers.LinkChatMapper;
 
-import java.util.Objects;
+import java.util.List;
 
 public interface LinkChatOperations {
     default void addLinkChat(
@@ -47,5 +47,15 @@ public interface LinkChatOperations {
             return true;
         }
         return false;
+    }
+
+    default List<LinkChatResponse> i_get_all_links_for_chat(JdbcTemplate jdbcTemplate, int chat_id) {
+        try {
+            String query = "SELECT * FROM links_tgchats WHERE chatid=(%d)";
+            query = query.formatted(chat_id);
+            return jdbcTemplate.query(query, new LinkChatMapper());
+        } catch (IndexOutOfBoundsException e) { // Если значение не нашлось
+            return null;
+        }
     }
 }

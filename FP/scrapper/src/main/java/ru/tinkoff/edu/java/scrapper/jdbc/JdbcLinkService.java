@@ -10,6 +10,10 @@ import ru.tinkoff.edu.java.scrapper.jdbc.operations.ChatOperations;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkChatOperations;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkOperations;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class JdbcLinkService implements LinkOperations, ChatOperations, LinkChatOperations {
     public void addLink(JdbcTemplate jdbc, AddLinkRequest link, Long chat) {
         LinkParser parser = new LinkParser();
@@ -42,6 +46,19 @@ public class JdbcLinkService implements LinkOperations, ChatOperations, LinkChat
         if (!i_findLinkChat(jdbc, link_id, chat_id)) {
             i_removeLinkChat(jdbc, link_id, chat_id);
         }
+    }
+
+    public List<LinkResponse> getLinks(JdbcTemplate jdbc, long chat) {
+        int i;
+        int chat_id = i_findChat(jdbc, chat);
+        if (chat_id == 0) {
+            throw new UnauthorizationException("Перед использованием нужно зарегистрироваться");
+        }
+        ArrayList<Integer> link_list = new ArrayList<>();
+        for (i = 0; i < i_get_all_links_for_chat(jdbc, chat_id).size(); i++){
+            link_list.add(i_get_all_links_for_chat(jdbc, chat_id).get(i).linkid());
+        }
+        return i_findAllLink(jdbc, link_list);
     }
 
 }

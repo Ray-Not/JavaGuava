@@ -31,9 +31,7 @@ public class ScrapperControllerLinks {
 
     @GetMapping
     public List<LinkResponse> linksGet(@RequestHeader("Tg-Chat-Id") Long tgChatId) {
-//        return findAllLink(jdbcTemplate, tgChatId);
-        List<LinkResponse> list = null;
-        return list;
+        return linkService.getLinks(jdbcTemplate, tgChatId);
     }
 
     @PostMapping
