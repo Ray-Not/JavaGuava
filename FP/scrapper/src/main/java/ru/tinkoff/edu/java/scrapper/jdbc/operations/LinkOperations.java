@@ -71,4 +71,13 @@ public interface LinkOperations {
             return 0;
         }
     }
+
+    default List<LinkResponse> i_getAllIds(JdbcTemplate jdbcTemplate) {
+        try {
+            String query = "SELECT * FROM links";
+            return jdbcTemplate.query(query, new LinkMapper());
+        } catch (IndexOutOfBoundsException e) { // Если значение не нашлось
+            return null;
+        }
+    }
 }

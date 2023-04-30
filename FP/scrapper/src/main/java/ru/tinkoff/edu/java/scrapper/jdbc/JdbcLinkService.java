@@ -13,7 +13,6 @@ import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkChatOperations;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkOperations;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class JdbcLinkService implements LinkOperations, ChatOperations, LinkChatOperations {

@@ -1,9 +1,6 @@
 package ru.tinkoff.edu.java.scrapper.jdbc;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import ru.tinkoff.edu.java.linkparser.LinkParser;
-import ru.tinkoff.edu.java.scrapper.api.model.AddLinkRequest;
-import ru.tinkoff.edu.java.scrapper.api.model.LinkResponse;
 import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.*;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.ChatOperations;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkChatOperations;
