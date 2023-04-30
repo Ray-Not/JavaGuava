@@ -32,35 +32,26 @@ public class ClientConfiguration {
         return weatherResponse;
     }
 
-    @Bean
-    public GitHubRecord gitHubClient() {
-
-        if(Objects.equals(gitLink, "")) gitLink = BASE_GIT_URL;
-
-        gitLink = pars.getLink(gitLink);
-        GitHubRecord gitHubResponse = builder.build()
+    public GitHubRecord gitHubClient(
+            String link
+    ) {
+        return builder.build()
                 .get()
-                .uri("https://api.github.com/repos/" + gitLink)
+                .uri("https://api.github.com/repos/" + link)
                 .retrieve()
                 .bodyToMono(GitHubRecord.class)
                 .block();
-        return gitHubResponse;
     }
 
-//    @Bean
-//    public StackOverflowRecord stackOverflowClient() {
-//
-//
-//        if(Objects.equals(stackLink, "")) stackLink = BASE_STACK_URL;
-//
-//        String params = "?order=desc&sort=activity&site=stackoverflow";
-//        stackLink = pars.getLink(stackLink);
-//        StackOverflowRecord stackOverflowResponse = builder.build()
-//                .get()
-//                .uri("https://api.stackexchange.com/2.3/questions/" + stackLink + params)
-//                .retrieve()
-//                .bodyToMono(StackOverflowRecord.class)
-//                .block();
-//        return stackOverflowResponse;
-//    }
+    public StackOverflowRecord stackOverflowClient(
+            String link
+    ) {
+        String params = "?order=desc&sort=activity&site=stackoverflow";
+        return builder.build()
+                .get()
+                .uri("https://api.stackexchange.com/2.3/questions/" + link + params)
+                .retrieve()
+                .bodyToMono(StackOverflowRecord.class)
+                .block();
+    }
 }
