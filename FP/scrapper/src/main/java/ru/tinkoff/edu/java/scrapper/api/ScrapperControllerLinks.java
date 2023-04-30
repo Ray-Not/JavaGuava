@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 public class ScrapperControllerLinks {
     private final JdbcTemplate jdbcTemplate;
+    JdbcLinkService linkService = new JdbcLinkService();
 
     public ScrapperControllerLinks(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -25,7 +26,7 @@ public class ScrapperControllerLinks {
             @RequestHeader("Tg-Chat-Id") Long tgChatId,
             @RequestBody RemoveLinkRequest removeLinkRequest
     ) {
-//        removeLink(jdbcTemplate, tgChatId, removeLinkRequest);
+        linkService.removeLink(jdbcTemplate, removeLinkRequest, tgChatId);
     }
 
     @GetMapping
@@ -40,7 +41,6 @@ public class ScrapperControllerLinks {
             @RequestHeader("Tg-Chat-Id") Long tgChatId,
             @RequestBody AddLinkRequest addLinkRequest
     ) {
-        JdbcLinkService addService = new JdbcLinkService();
-        addService.addLink(jdbcTemplate, addLinkRequest, tgChatId);
+        linkService.addLink(jdbcTemplate, addLinkRequest, tgChatId);
     }
 }

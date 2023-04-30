@@ -5,10 +5,11 @@ import ru.tinkoff.edu.java.scrapper.api.model.AddLinkRequest;
 import ru.tinkoff.edu.java.scrapper.api.model.LinkResponse;
 import ru.tinkoff.edu.java.scrapper.api.model.ListLinksResponse;
 import ru.tinkoff.edu.java.scrapper.api.model.RemoveLinkRequest;
+import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.EntryNotExsistException;
 import ru.tinkoff.edu.java.scrapper.jdbc.mappers.LinkMapper;
 
 public interface LinkOperations {
-    default void addLink(
+    default void i_addLink(
             JdbcTemplate jdbcTemplate,
             AddLinkRequest addLinkRequest
     ) {
@@ -26,17 +27,21 @@ public interface LinkOperations {
         jdbcTemplate.update("INSERT INTO links VALUES(?, ?)", link_id, addLinkRequest.link());
     }
 
-    default void removeLink(
+    default void i_removeLink(
             JdbcTemplate jdbcTemplate,
             RemoveLinkRequest removeLinkRequest
-    ){}
+    ){
+        String query = "DELETE FROM links where link IN ('%s')";
+        query = query.formatted(removeLinkRequest.link());
+        jdbcTemplate.update(query);
+    }
 
-    default void findAllLink(
+    default void i_findAllLink(
             JdbcTemplate jdbcTemplate,
             ListLinksResponse listLinksResponse
     ){}
 
-    default int findLink(
+    default int i_findLink(
             JdbcTemplate jdbcTemplate,
             String link
     ){

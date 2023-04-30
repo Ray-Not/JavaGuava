@@ -15,7 +15,26 @@ public interface LinkChatOperations {
         jdbcTemplate.update("INSERT INTO links_tgchats VALUES(?, ?)", link_id, chat_id);
     }
 
-    default boolean findLinkChat(
+    default void i_removeLinkChat(
+            JdbcTemplate jdbcTemplate,
+            int link_id,
+            int chat_id
+    ) {
+        String query = "DELETE FROM links_tgchats WHERE linkid=(%d) AND chatid=(%d)";
+        query = query.formatted(link_id, chat_id);
+        jdbcTemplate.update(query);
+    }
+
+    default void i_removeLinkChatAllChat(
+            JdbcTemplate jdbcTemplate,
+            int chat_id
+    ) {
+        String query = "DELETE FROM links_tgchats WHERE chatid=(%d)";
+        query = query.formatted(chat_id);
+        jdbcTemplate.update(query);
+    }
+
+    default boolean i_findLinkChat(
             JdbcTemplate jdbcTemplate,
             int link_id,
             int chat_id

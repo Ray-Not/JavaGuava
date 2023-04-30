@@ -5,7 +5,7 @@ import ru.tinkoff.edu.java.scrapper.jdbc.mappers.ChatMapper;
 import ru.tinkoff.edu.java.scrapper.jdbc.mappers.LinkMapper;
 
 public interface ChatOperations {
-    default void addChat(
+    default void i_addChat(
             JdbcTemplate jdbcTemplate,
             long chat
     ) {
@@ -23,12 +23,16 @@ public interface ChatOperations {
         jdbcTemplate.update("INSERT INTO tgchats VALUES(?, ?)", chat_id, chat);
     }
 
-    default void removeChat(
+    default void i_removeChat(
             JdbcTemplate jdbcTemplate,
             long chat
-    ){}
+    ){
+        String query = "DELETE FROM tgchats WHERE tg_chat_id=(%d)";
+        query = query.formatted(chat);
+        jdbcTemplate.update(query);
+    }
 
-    default int findChat(
+    default int i_findChat(
             JdbcTemplate jdbcTemplate,
             long chat
     ){

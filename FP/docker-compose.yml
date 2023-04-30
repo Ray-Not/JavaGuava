@@ -3,7 +3,7 @@ version: '1.-'
 services:
   postgres:
     container_name: postgres
-    image: postgres
+    image: postgres:15.2
     environment:
       POSTGRES_DB: scrapper
       POSTGRES_USER: scrap_user
@@ -17,7 +17,7 @@ services:
 
   liquibase-migrations:
     container_name: liquibase
-    image: liquibase/liquibase
+    image: liquibase/liquibase:4.18
     deploy:
       restart_policy:
         condition: on-failure
