@@ -1,0 +1,60 @@
+services:
+  postgresql:
+    image: postgres:15
+    container_name: postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=lwbeamer
+      - POSTGRES_PASSWORD=2281337
+      - POSTGRES_DB=scrapper
+    volumes:
+      - link-service-data:/var/lib/postgresql/data
+    networks:
+      - backend
+
+  liquibase-migrations:
+    image: liquibase/liquibase:4.18
+    depends_on:
+      - postgresql
+    command:
+      - --hub-mode=off
+      - --changelog-file=master.xml
+      - --driver=org.postgresql.Driver
+      - --url=jdbc:postgresql://postgresql:5432/scrapper
+      - --username=romanova
+      - --password=12345654321
+      - update
+    volumes:
+      - ./migrations:/liquibase/changelog
+    networks:
+      - backend
+
+volumes:
+  link-service-data:
+
+networks:
+  backend:
+    name: backend
+    rabbit:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    container_name: rabbit
+    ports:
+      - 15672:15672
+      - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=romanova
+      - RABBITMQ_DEFAULT_PASS=12345654321
+    volumes:
+      - rabbitmq-state:/var/lib/rabbitmq
+    networks:
+      - backend
+
+volumes:
+  link-service-data:
+  rabbitmq-state:
+
+networks:
+  backend:
+    name: backend
