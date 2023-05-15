@@ -13,4 +13,5 @@ public class BotApplication {
         ApplicationConfig config = ctx.getBean(ApplicationConfig.class);
 
     }
+    
 }

@@ -16,12 +16,7 @@ public class ClientConfiguration {
 
     @Value("${so.baseurl}")
     private String stackOverflowBaseUrl;
-    
-    @Value("${bot.baseurl}")
-    private String botBaseUrl;
 
-
-    //Регистрируем клиентов как бины
     @Bean
     public GitHubClient gitHubClientService() {
         return new GitHubClient(gitHubBaseUrl);

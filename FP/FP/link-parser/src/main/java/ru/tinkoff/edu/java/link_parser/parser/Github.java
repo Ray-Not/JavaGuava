@@ -12,19 +12,18 @@ public class Github extends Abstract {
     }
 
     @Override
-    public Parser_Link parser_Link(String url) {
-    	URL toParse = tweakUrl(url);
-        if (toParse == null) return null;
+    public Parser_Link parseResult(URL url) {
 
-        if (toParse.getHost().equals("github.com")) {
-            String[] tokens = toParse.getFile().substring(1).split("/");
+        if (url.getHost().equals("github.com")) {
+            String[] tokens = url.getFile().substring(1).split("/");
             if (tokens.length >= 2) {
                 return new GitHub_Link(tokens[0], tokens[1]);
-            } else return null;
+            }
         }
 
-
-        if (nextParser != null) return nextParser.parser_Link(url);
+        if (nextParser != null) {
+            return nextParser.parseResult(url);
+        }
 
         return null;
     }

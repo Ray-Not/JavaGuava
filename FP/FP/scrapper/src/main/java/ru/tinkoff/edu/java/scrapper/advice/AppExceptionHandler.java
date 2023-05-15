@@ -20,14 +20,23 @@ public class AppExceptionHandler {
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     public ApiErrorResponse handleNotFoundExceptions(RuntimeException exception) {
         return new ApiErrorResponse(
-                "Error", HttpStatus.NOT_FOUND.toString(), exception.getClass().getName(), exception.getMessage(), Arrays.stream(exception.getStackTrace()).map(StackTraceElement::toString).toList().toArray(String[]::new));
+            "Error",
+            HttpStatus.NOT_FOUND.toString(),
+            exception.getClass().getName(),
+            exception.getMessage(),
+            Arrays.stream(exception.getStackTrace()).map(StackTraceElement::toString).toList().toArray(String[]::new)
+        );
     }
-
 
     @ExceptionHandler({ChatAlreadyExistException.class, LinkIsAlreadyAddedException.class})
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     public ApiErrorResponse handleBadRequestExceptions(RuntimeException exception) {
         return new ApiErrorResponse(
-                "Error", HttpStatus.BAD_REQUEST.toString(), exception.getClass().getName(), exception.getMessage(), Arrays.stream(exception.getStackTrace()).map(StackTraceElement::toString).toList().toArray(String[]::new));
+            "Error",
+            HttpStatus.BAD_REQUEST.toString(),
+            exception.getClass().getName(),
+            exception.getMessage(),
+            Arrays.stream(exception.getStackTrace()).map(StackTraceElement::toString).toList().toArray(String[]::new)
+        );
     }
 }

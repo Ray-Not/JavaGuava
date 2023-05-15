@@ -1,12 +1,10 @@
 package ru.tinkoff.edu.java.scrapper.mapper;
 
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
-import ru.tinkoff.edu.java.scrapper.model.Relation;
+import ru.tinkoff.edu.java.scrapper.model.jdbcAndJooq.Relation;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Component
 public class SubscriptionRowMapper implements RowMapper<Relation> {
 
     @Override

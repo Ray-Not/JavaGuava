@@ -24,7 +24,7 @@ public class UserEntity {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_link",
-            joinColumns = @JoinColumn(name = "chat_id"),
-            inverseJoinColumns = @JoinColumn(name = "link_id"))
+               joinColumns = @JoinColumn(name = "chat_id"),
+               inverseJoinColumns = @JoinColumn(name = "link_id"))
     private List<LinkEntity> links;
 }

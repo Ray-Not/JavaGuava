@@ -19,7 +19,8 @@ public class User {
     private String username;
     private String firstName;
     private String lastName;
-    public static UserEntity toEntity(User user){
+
+    public static UserEntity toEntity(User user) {
         UserEntity userEntity = new UserEntity();
 
         userEntity.setChatId(user.getChatId());
@@ -29,4 +30,5 @@ public class User {
 
         return userEntity;
     }
+
 }

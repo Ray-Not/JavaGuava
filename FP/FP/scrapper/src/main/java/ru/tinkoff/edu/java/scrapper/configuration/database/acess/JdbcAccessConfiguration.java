@@ -50,7 +50,10 @@ public class JdbcAccessConfiguration {
     }
 
     @Bean
-    public SubscriptionRepository subscriptionRepository(JdbcTemplate jdbcTemplate, SubscriptionRowMapper subscriptionRowMapper) {
+    public SubscriptionRepository subscriptionRepository(
+        JdbcTemplate jdbcTemplate,
+        SubscriptionRowMapper subscriptionRowMapper
+    ) {
         return new SubscriptionJdbcTemplateRepository(jdbcTemplate, subscriptionRowMapper, linkRowMapper());
     }
 
@@ -61,39 +64,43 @@ public class JdbcAccessConfiguration {
 
     @Bean
     public LinkUpdateService linkUpdateService(
-            LinkRepository linkRepository,
-            SubscriptionRepository subscriptionRepository,
-            Link_Parser linkParser,
-            GitHubClient gitHubClient,
-            StackOverflowClient stackOverflowClient,
-            BotClient botClient
+        LinkRepository linkRepository,
+        SubscriptionRepository subscriptionRepository,
+        LinkParser linkParser,
+        GitHubClient gitHubClient,
+        StackOverflowClient stackOverflowClient,
+        UpdateNotificationService notificationService
     ) {
         return new LinkUpdateServiceImpl(
-                linkRepository,
-                subscriptionRepository,
-                linkParser,
-                gitHubClient,
-                stackOverflowClient,
-                botClient);
+            linkRepository,
+            subscriptionRepository,
+            linkParser,
+            gitHubClient,
+            stackOverflowClient,
+            notificationService
+        );
+
     }
 
     @Bean
     public SubscriptionService subscriptionService(
-            LinkRepository linkRepository,
-            SubscriptionRepository subscriptionRepository
+        LinkRepository linkRepository,
+        SubscriptionRepository subscriptionRepository
     ) {
         return new SubscriptionServiceImpl(
-                linkRepository,
-                subscriptionRepository);
+            linkRepository,
+            subscriptionRepository
+        );
     }
 
     @Bean
     public TgChatService tgChatService(
-            UserRepository userRepository,
-            SubscriptionRepository subscriptionRepository
+        UserRepository userRepository,
+        SubscriptionRepository subscriptionRepository
     ) {
         return new TgChatServiceImpl(
-                userRepository,
-                subscriptionRepository);
+            userRepository,
+            subscriptionRepository
+        );
     }
 }

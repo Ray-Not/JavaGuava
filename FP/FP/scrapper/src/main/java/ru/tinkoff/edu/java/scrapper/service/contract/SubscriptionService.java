@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface SubscriptionService {
 
-    Link add(Long chatId, URI url);
-    Link remove(Long chatId, URI url);
+    Link subscribe(Long chatId, URI url);
 
-    List<Link> getAllByUser(Long chatId);
+    Link unsubscribe(Long chatId, URI url);
 
+    List<Link> getLinksByChat(Long chatId);
+
+    List<Long> getChatIdsByLink(Long linkId);
 }

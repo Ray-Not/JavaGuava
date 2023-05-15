@@ -10,7 +10,6 @@ import java.util.List;
 @Data
 public class LinkEntity {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,6 +34,5 @@ public class LinkEntity {
 
     @Column(name = "so_answer_count")
     private Integer soAnswerCount;
-
 
 }

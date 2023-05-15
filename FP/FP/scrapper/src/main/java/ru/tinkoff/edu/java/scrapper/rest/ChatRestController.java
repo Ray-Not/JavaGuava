@@ -9,13 +9,11 @@ import ru.tinkoff.edu.java.scrapper.model.commonDto.User;
 @RequestMapping("/tg-chat")
 public class ChatRestController {
 
-
     private final TgChatService chatService;
 
     public ChatRestController(TgChatService chatService) {
         this.chatService = chatService;
     }
-
     @PostMapping(value = "{id}")
     public void registerChat(@PathVariable Long id, @RequestBody UserAddDto userAddDto) {
         chatService.register(new User(id, userAddDto.username(), userAddDto.firstName(), userAddDto.lastName()));
@@ -25,6 +23,5 @@ public class ChatRestController {
     public void deleteChat(@PathVariable Long id) {
         chatService.unregister(id);
     }
-
 
 }
