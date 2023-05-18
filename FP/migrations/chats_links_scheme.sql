@@ -1,8 +1,0 @@
-CREATE TABLE links (id INTEGER PRIMARY KEY, link VARCHAR(128) NOT NULL);
-
-CREATE TABLE tgChats (id INTEGER PRIMARY KEY, tg_chat_id BIGINT NOT NULL);
-
-CREATE TABLE links_tgChats (
-    linkid INTEGER,
-    chatid INTEGER
-);
