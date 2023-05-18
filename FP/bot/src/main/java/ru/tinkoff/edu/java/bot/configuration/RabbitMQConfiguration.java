@@ -7,9 +7,7 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import ru.tinkoff.edu.java.bot.dto.LinkUpdate;
-import ru.tinkoff.edu.java.bot.service.ScrapperQueueListener;
-import ru.tinkoff.edu.java.bot.service.UpdateService;
+import ru.tinkoff.edu.java.bot.api.model.LinkUpdate;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,10 +53,10 @@ public class RabbitMQConfiguration {
     @Bean
     public ClassMapper classMapper() {
         Map<String, Class<?>> mappings = new HashMap<>();
-        mappings.put("ru.tinkoff.edu.java.scrapper.dto.LinkUpdate", LinkUpdate.class);
+        mappings.put("ru.tinkoff.edu.java.bot.api.model.LinkUpdate", LinkUpdate.class);
 
         DefaultClassMapper classMapper = new DefaultClassMapper();
-        classMapper.setTrustedPackages("ru.tinkoff.edu.java.scrapper.dto.*");
+        classMapper.setTrustedPackages("ru.tinkoff.edu.java.bot.api.model.*");
         classMapper.setIdClassMapping(mappings);
         return classMapper;
     }

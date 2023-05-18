@@ -1,15 +1,17 @@
 package ru.tinkoff.edu.java.scrapper.configuration;
 
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
+import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import ru.tinkoff.edu.java.scrapper.service.ScrapperQueueProducer;
+import ru.tinkoff.edu.java.scrapper.rabbitmq.ScrapperQueueProducer;
 
-@Configuration
-@ConditionalOnProperty(prefix = "app", name = "use-queue", havingValue = "true")
+@SpringBootApplication
 public class RabbitMQConfiguration {
 
     private final ApplicationConfig config;
@@ -17,7 +19,6 @@ public class RabbitMQConfiguration {
     public RabbitMQConfiguration(ApplicationConfig config) {
         this.config = config;
     }
-
     @Bean
     Queue queue() {
         return QueueBuilder.durable(config.queueName())
@@ -41,10 +42,8 @@ public class RabbitMQConfiguration {
         return new Jackson2JsonMessageConverter();
     }
 
-
     @Bean
     public ScrapperQueueProducer scrapperQueueProducer(AmqpTemplate rabbitTemplate) {
         return new ScrapperQueueProducer(rabbitTemplate, config);
     }
-
 }

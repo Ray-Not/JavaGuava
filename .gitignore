@@ -1,6 +1,7 @@
 # Compiled class file
 *.class
 
+
 # Log file
 *.log
 
@@ -23,4 +24,8 @@
 hs_err_pid*
 
 # idea
-.idea
+FP/.idea/
+
+# volumes
+FP/migrations/
+FP/rabbitmq/
