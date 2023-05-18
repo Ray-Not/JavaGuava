@@ -24,8 +24,8 @@
 hs_err_pid*
 
 # idea
-.FP/.idea
+FP/.idea/
 
 # volumes
-.FP/migrations
-.FP/rabbitmq
+FP/migrations/
+FP/rabbitmq/

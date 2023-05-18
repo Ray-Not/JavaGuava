@@ -36,6 +36,16 @@ services:
       - ./migrations:/liquibase/changelog
     networks:
       - backend
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 5672:5672  # Порт для AMQP
+      - 15672:15672  # Порт для RabbitMQ Management UI
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=root
 
 networks:
   backend:
