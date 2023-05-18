@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.bot.firstBot.commands;
+package ru.tinkoff.edu.java.bot.handler.commands;
 
 public interface Start {
     

@@ -1,27 +1,27 @@
 package ru.tinkoff.edu.java.scrapper.rabbitmq;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
-import ru.tinkoff.edu.java.bot.api.model.LinkUpdate;
-
-import ru.tinkoff.edu.java.scrapper.configuration.ApplicationConfig;
+import ru.tinkoff.edu.java.bot.configuration.RabbitMQConfiguration;
+import ru.tinkoff.edu.java.bot.configuration.records.ApplicationConfig;
+import ru.tinkoff.edu.java.bot.model.LinkUpdate;
 
 @Service
 public class ScrapperQueueProducer {
-
-    private final AmqpTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     private final ApplicationConfig config;
 
-
-    public ScrapperQueueProducer(AmqpTemplate rabbitTemplate, ApplicationConfig config) {
+    public ScrapperQueueProducer(RabbitTemplate rabbitTemplate, ApplicationConfig config) {
         this.rabbitTemplate = rabbitTemplate;
         this.config = config;
     }
 
     public void send(LinkUpdate update) {
-        rabbitTemplate.convertAndSend(config.exchangeName(), config.routingKey(), update);
-        System.out.println("Mess update: " + update);
+        String exchange = config.exchange(); // Имя обмена
+        String routingKey = config.routingKey(); // Маршрутный ключ
+
+        rabbitTemplate.convertAndSend(exchange, routingKey, update);
     }
 }
+

@@ -36,6 +36,7 @@ services:
       - ./migrations:/liquibase/changelog
     networks:
       - backend
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:
@@ -44,8 +45,8 @@ services:
     volumes:
       - ./rabbitmq:/var/lib/rabbitmq
     environment:
-      - RABBITMQ_DEFAULT_USER=root
-      - RABBITMQ_DEFAULT_PASS=root
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
 
 networks:
   backend:

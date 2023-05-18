@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.bot.firstBot;
+package ru.tinkoff.edu.java.bot.handler;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.UpdatesListener;

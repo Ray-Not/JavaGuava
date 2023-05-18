@@ -1,6 +1,6 @@
-package ru.tinkoff.edu.java.bot.firstBot.commands;
+package ru.tinkoff.edu.java.bot.handler.commands;
 
-import ru.tinkoff.edu.java.bot.firstBot.DB;
+import ru.tinkoff.edu.java.bot.handler.DB;
 
 public interface List {
     default String list() {

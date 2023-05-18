@@ -1,11 +1,9 @@
-package ru.tinkoff.edu.java.bot.configuration;
+package ru.tinkoff.edu.java.bot.configuration.records;
 
 import jakarta.validation.constraints.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.annotation.Validated;
-import ru.tinkoff.edu.java.bot.configuration.configRecords.Bot;
-import ru.tinkoff.edu.java.bot.configuration.configRecords.Scheduler;
 
 @Validated
 @EnableScheduling
@@ -13,6 +11,9 @@ import ru.tinkoff.edu.java.bot.configuration.configRecords.Scheduler;
 public record ApplicationConfig(
         @NotNull String test,
         @NotNull Scheduler scheduler,
+        String exchange,
+        String routingKey,
+        String queue,
         Bot bot
 ) {
 }

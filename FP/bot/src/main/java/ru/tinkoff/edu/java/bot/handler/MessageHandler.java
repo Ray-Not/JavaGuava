@@ -1,6 +1,6 @@
-package ru.tinkoff.edu.java.bot.firstBot;
+package ru.tinkoff.edu.java.bot.handler;
 
-import ru.tinkoff.edu.java.bot.firstBot.commands.All;
+import ru.tinkoff.edu.java.bot.handler.commands.All;
 
 public class MessageHandler extends All {
 

@@ -1,9 +1,9 @@
-package ru.tinkoff.edu.java.bot.firstBot;
+package ru.tinkoff.edu.java.bot.handler;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import ru.tinkoff.edu.java.bot.configuration.ApplicationConfig;
+import ru.tinkoff.edu.java.bot.configuration.records.ApplicationConfig;
 
 
 @EnableConfigurationProperties(ApplicationConfig.class)

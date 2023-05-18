@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.tinkoff.edu.java.bot.firstBot.DB;
-import ru.tinkoff.edu.java.bot.firstBot.MessageHandler;
+import ru.tinkoff.edu.java.bot.handler.DB;
+import ru.tinkoff.edu.java.bot.handler.MessageHandler;
 
 
 public class BotTest {

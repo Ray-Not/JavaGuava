@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.bot.firstBot;
+package ru.tinkoff.edu.java.bot.handler;
 
 import java.util.ArrayList;
 
