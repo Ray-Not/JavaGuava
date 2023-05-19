@@ -27,5 +27,5 @@ hs_err_pid*
 FP/.idea/
 
 # volumes
-FP/migrations/
+FP/migrations/postgres_data/
 FP/rabbitmq/
