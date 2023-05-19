@@ -32,4 +32,4 @@ jobs:
         
         
       - name: Build scrapper Docker image
-        run: cd scrapper && docker build -t scrapper-image -f Dockerfile .
+        run: docker build -t scrapper-image -f Dockerfile .
