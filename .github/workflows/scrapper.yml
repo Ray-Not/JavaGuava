@@ -3,7 +3,7 @@ name: Scrapper Build
 on:
   push:
     paths:
-      - 'scrapper/**'
+      - 'FP/scrapper/**'
 
 jobs:
   build:
