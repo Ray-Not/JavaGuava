@@ -13,20 +13,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    distribution:
-        description: 'Distribution of the application'
-        required: true
-        default: 'ubuntu-latest'
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 20
-        uses: actions/setup-java@v2
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
         with:
-          java-version: 20
-
-      - name: Build and package scrapper
-        run: |
-          mvn package -pl scrapper -am
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Maven
+        run: mvn package
