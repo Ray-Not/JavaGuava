@@ -32,4 +32,4 @@ jobs:
         
         
       - name: Build scrapper Docker image
-        run: docker build -t scrapper-image -f scrapper.Dockerfile .
+        run: cd FP && docker build -t scrapper-image -f scrapper.Dockerfile .
