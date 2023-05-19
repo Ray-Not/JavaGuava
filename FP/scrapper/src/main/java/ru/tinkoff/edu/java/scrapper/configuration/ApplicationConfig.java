@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.annotation.Validated;
 import ru.tinkoff.edu.java.scrapper.rabbitmq.ScrapperQueueProducer;
@@ -17,6 +18,7 @@ import ru.tinkoff.edu.java.scrapper.schedule.Scheduler;
 @Validated
 @ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
 @EnableScheduling
+@Import(RabbitMQConfiguration.class)
 public record ApplicationConfig(
         @NotNull String test,
         @NotNull Scheduler scheduler,
