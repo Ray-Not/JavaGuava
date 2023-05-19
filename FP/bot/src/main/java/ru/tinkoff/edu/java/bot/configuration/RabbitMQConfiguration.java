@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.tinkoff.edu.java.bot.configuration.records.ApplicationConfig;
 
+import java.util.Collections;
+
 @Configuration
 public class RabbitMQConfiguration {
 
@@ -23,16 +25,32 @@ public class RabbitMQConfiguration {
 
     @Bean
     public Queue queue() {
-        return new Queue(config.queue());
+        return QueueBuilder.durable(config.queue())
+                .withArgument("x-dead-letter-exchange",config.queue() + ".dlq")
+                .build();
     }
 
     @Bean
     public Binding binding(Queue queue, DirectExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(config.routingKey());
+        return BindingBuilder.bind(queue)
+                .to(exchange)
+                .with(config.routingKey());
     }
 
     @Bean
-    public MessageConverter jsonMessageConverter() {
-        return new Jackson2JsonMessageConverter();
+    public DirectExchange dlqExchange() {
+        return new DirectExchange(config.exchange() + ".dlq");
+    }
+
+    @Bean
+    public Queue dlqQueue() {
+        return QueueBuilder.durable(config.queue() + ".dlq").build();
+    }
+
+    @Bean
+    public Binding dlqBinding() {
+        return BindingBuilder.bind(dlqQueue())
+                .to(dlqExchange())
+                .with(config.routingKey());
     }
 }

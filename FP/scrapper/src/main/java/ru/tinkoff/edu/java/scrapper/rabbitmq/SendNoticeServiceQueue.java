@@ -1,7 +1,7 @@
 package ru.tinkoff.edu.java.scrapper.rabbitmq;
 
 import org.springframework.stereotype.Service;
-import ru.tinkoff.edu.java.bot.model.LinkUpdate;
+import ru.tinkoff.edu.java.scrapper.model.LinkUpdate;
 
 @Service
 public class SendNoticeServiceQueue implements SendNoticeServiceImplement {

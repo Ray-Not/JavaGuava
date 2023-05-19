@@ -72,12 +72,6 @@
         </dependency>
         <!--Client-->
         <dependency>
-            <groupId>org.example</groupId>
-            <artifactId>bot</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>

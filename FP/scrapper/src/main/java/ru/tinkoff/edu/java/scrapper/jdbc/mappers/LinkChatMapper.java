@@ -1,7 +1,7 @@
 package ru.tinkoff.edu.java.scrapper.jdbc.mappers;
 
 import org.springframework.jdbc.core.RowMapper;
-import ru.tinkoff.edu.java.scrapper.api.model.LinkChatResponse;
+import ru.tinkoff.edu.java.scrapper.model.LinkChatResponse;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

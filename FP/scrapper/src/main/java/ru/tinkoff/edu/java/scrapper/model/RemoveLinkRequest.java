@@ -1,3 +1,3 @@
-package ru.tinkoff.edu.java.scrapper.api.model;
+package ru.tinkoff.edu.java.scrapper.model;
 
 public record RemoveLinkRequest(String link) {}

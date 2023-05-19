@@ -1,9 +1,9 @@
 package ru.tinkoff.edu.java.scrapper.jdbc.operations;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import ru.tinkoff.edu.java.scrapper.api.model.AddLinkRequest;
-import ru.tinkoff.edu.java.scrapper.api.model.LinkResponse;
-import ru.tinkoff.edu.java.scrapper.api.model.RemoveLinkRequest;
+import ru.tinkoff.edu.java.scrapper.model.AddLinkRequest;
+import ru.tinkoff.edu.java.scrapper.model.LinkResponse;
+import ru.tinkoff.edu.java.scrapper.model.RemoveLinkRequest;
 import ru.tinkoff.edu.java.scrapper.jdbc.mappers.LinkMapper;
 
 import java.util.ArrayList;

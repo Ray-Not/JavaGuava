@@ -1,9 +1,11 @@
 package ru.tinkoff.edu.java.scrapper.configuration;
 
 import jakarta.validation.constraints.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.validation.annotation.Validated;
 import ru.tinkoff.edu.java.scrapper.rabbitmq.ScrapperQueueProducer;
@@ -18,7 +20,10 @@ import ru.tinkoff.edu.java.scrapper.schedule.Scheduler;
 public record ApplicationConfig(
         @NotNull String test,
         @NotNull Scheduler scheduler,
-        @Value("${useQueue}") boolean useQueue
+        Boolean useQueue,
+        String exchange,
+        String routingKey,
+        String queue
 ) {
 @Bean
 public SendNoticeServiceImplement notificationService(ScrapperQueueProducer queueProducer/*, BotClient botClient */) {

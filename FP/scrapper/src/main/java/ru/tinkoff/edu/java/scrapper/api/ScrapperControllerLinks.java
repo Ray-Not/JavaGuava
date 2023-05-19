@@ -5,8 +5,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.tinkoff.edu.java.scrapper.api.model.*;
 import ru.tinkoff.edu.java.scrapper.jdbc.JdbcLinkService;
+import ru.tinkoff.edu.java.scrapper.model.AddLinkRequest;
+import ru.tinkoff.edu.java.scrapper.model.LinkResponse;
+import ru.tinkoff.edu.java.scrapper.model.RemoveLinkRequest;
 
 import java.util.List;
 

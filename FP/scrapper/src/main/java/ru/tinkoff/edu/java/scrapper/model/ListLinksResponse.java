@@ -1,4 +1,4 @@
-package ru.tinkoff.edu.java.scrapper.api.model;
+package ru.tinkoff.edu.java.scrapper.model;
 
 import java.util.*;
 
