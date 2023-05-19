@@ -3,10 +3,10 @@ name: Scrapper Build
 on:
   push:
     paths:
-      - '.FP/scrapper/**'
+      - '../FP/scrapper/**'
   pull_request:
     paths:
-      - '.FP/scrapper/**'
+      - '../FP/scrapper/**'
       - '.github/workflows/scrapper.yml' # Include this path to trigger the workflow when changes are made to the workflow file itself
 
 jobs:
