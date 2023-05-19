@@ -1,7 +1,6 @@
 package ru.tinkoff.edu.java.bot.handler.commands;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.EntryExsistException;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.ChatOperations;
 
 public interface Start extends ChatOperations {

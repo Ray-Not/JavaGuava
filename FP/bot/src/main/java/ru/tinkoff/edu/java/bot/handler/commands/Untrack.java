@@ -1,7 +1,6 @@
 package ru.tinkoff.edu.java.bot.handler.commands;
 
 import org.springframework.jdbc.core.JdbcTemplate;
-import ru.tinkoff.edu.java.bot.handler.DB;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.ChatOperations;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkChatOperations;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkOperations;

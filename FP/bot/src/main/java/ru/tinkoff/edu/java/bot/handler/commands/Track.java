@@ -2,17 +2,11 @@ package ru.tinkoff.edu.java.bot.handler.commands;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
-import ru.tinkoff.edu.java.bot.handler.DB;
 import ru.tinkoff.edu.java.linkparser.LinkParser;
 import ru.tinkoff.edu.java.scrapper.client.ClientConfiguration;
-import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.EntryExsistException;
-import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.EntryNotExsistException;
-import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.NullLinkException;
-import ru.tinkoff.edu.java.scrapper.exceptions.customExceptions.UnauthorizationException;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.ChatOperations;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkChatOperations;
 import ru.tinkoff.edu.java.scrapper.jdbc.operations.LinkOperations;
-import ru.tinkoff.edu.java.scrapper.model.RemoveLinkRequest;
 
 public interface Track extends LinkOperations, LinkChatOperations, ChatOperations {
     default String track(JdbcTemplate jdbc, String link, long chat) {
