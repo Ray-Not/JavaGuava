@@ -3,10 +3,8 @@ name: Bot CI
 on:
   push:
     paths:
-      - "TinkoffEdu/bot/**"
-      - "TinkoffEdu/bot.Dockerfile"
-      - "TinkoffEdu/checkstyle.xml"
-      - "TinkoffEdu/pom.xml"
+      - "FP/bot/**"
+      - "FP/pom.xml"
       - ".github/workflows/bot.yaml"
 
 jobs:
