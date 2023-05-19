@@ -7,12 +7,14 @@ on:
   pull_request:
     paths:
       - '../FP/scrapper/**'
-      - '.github/workflows/scrapper.yml' # Include this path to trigger the workflow when changes are made to the workflow file itself
+      - '.github/workflows/scrapper.yml'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
