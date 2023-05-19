@@ -13,10 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    inputs:
-      distribution:
-        description: 'Distribution of the application'
-        required: true
+    env:
+      DISTRIBUTION: ${{ github.event.inputs.distribution }}
 
     steps:
       - name: Checkout repository
@@ -28,4 +26,5 @@ jobs:
           java-version: 11
 
       - name: Build and package scrapper
-        run: mvn package -pl scrapper -am
+        run: |
+          mvn package -pl scrapper -am
