@@ -3,7 +3,7 @@ name: Bot Build
 on:
   push:
     paths:
-      - 'bot/**'
+      - 'FP/bot/**'
 
 jobs:
   build:
