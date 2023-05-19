@@ -13,7 +13,7 @@ import java.util.List;
 public interface LinkOperations {
     default void i_addLink(
             JdbcTemplate jdbcTemplate,
-            AddLinkRequest addLinkRequest
+            String link
     ) {
         int link_id;
 
@@ -26,15 +26,15 @@ public interface LinkOperations {
             link_id = 1;
         }
 
-        jdbcTemplate.update("INSERT INTO links VALUES(?, ?)", link_id, addLinkRequest.link());
+        jdbcTemplate.update("INSERT INTO links VALUES(?, ?)", link_id, link);
     }
 
     default void i_removeLink(
             JdbcTemplate jdbcTemplate,
-            RemoveLinkRequest removeLinkRequest
+            String link
     ){
         String query = "DELETE FROM links where link IN ('%s')";
-        query = query.formatted(removeLinkRequest.link());
+        query = query.formatted(link);
         jdbcTemplate.update(query);
     }
 

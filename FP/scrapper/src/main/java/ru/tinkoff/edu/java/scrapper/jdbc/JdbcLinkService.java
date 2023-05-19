@@ -1,5 +1,6 @@
 package ru.tinkoff.edu.java.scrapper.jdbc;
 
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import ru.tinkoff.edu.java.linkparser.LinkParser;
@@ -37,7 +38,7 @@ public class JdbcLinkService implements LinkOperations, ChatOperations, LinkChat
             throw new UnauthorizationException("Перед использованием нужно зарегистрироваться");
         }
         if (link_id == 0) {
-            i_addLink(jdbc, link);
+            i_addLink(jdbc, link.link());
             link_id = i_findLink(jdbc, link.link());
         }
         if (i_findLinkChat(jdbc, link_id, chat_id)) {
@@ -52,7 +53,7 @@ public class JdbcLinkService implements LinkOperations, ChatOperations, LinkChat
             throw new UnauthorizationException("Перед использованием нужно зарегистрироваться");
         }
         if (link_id != 0) {
-            i_removeLink(jdbc, link);
+            i_removeLink(jdbc, link.link());
         } else throw new EntryNotExsistException("Ссылки не существует");
         if (!i_findLinkChat(jdbc, link_id, chat_id)) {
             i_removeLinkChat(jdbc, link_id, chat_id);
@@ -66,10 +67,15 @@ public class JdbcLinkService implements LinkOperations, ChatOperations, LinkChat
             throw new UnauthorizationException("Перед использованием нужно зарегистрироваться");
         }
         ArrayList<Integer> link_list = new ArrayList<>();
-        for (i = 0; i < i_get_all_links_for_chat(jdbc, chat_id).size(); i++){
-            link_list.add(i_get_all_links_for_chat(jdbc, chat_id).get(i).linkid());
+        try {
+            for (i = 0; i < i_get_all_links_for_chat(jdbc, chat_id).size(); i++) {
+                link_list.add(i_get_all_links_for_chat(jdbc, chat_id).get(i).linkid());
+            }
+            return i_findAllLink(jdbc, link_list);
+        } catch (BadSqlGrammarException e) {
+            throw new EntryNotExsistException("У вас нет ссылок");
         }
-        return i_findAllLink(jdbc, link_list);
+
     }
 
 }

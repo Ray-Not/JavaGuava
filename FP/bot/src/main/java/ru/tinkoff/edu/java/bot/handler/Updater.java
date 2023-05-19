@@ -5,22 +5,27 @@ import com.pengrad.telegrambot.UpdatesListener;
 import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.model.request.*;
 import com.pengrad.telegrambot.request.SendMessage;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
 public class Updater implements UpdatesListener {
 
-    MessageHandler handler = new MessageHandler();
+    MessageHandler handler;
     String command;
     TelegramBot bot;
+    private JdbcTemplate jdbcTemplate;
+    private long chatid;
 
-    public Updater(TelegramBot bot) {
+    public Updater(TelegramBot bot, JdbcTemplate jdbcTemplate) {
         this.bot = bot;
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public int process(List<Update> updates) {
         Update update = updates.get(0);
+        handler = new MessageHandler(jdbcTemplate, update.message().chat().id());
         if(handler.is_command(update.message().text())) {
             String[] parse = update.message().text().split(" ");
             if(parse.length > 1) command = handler.call_command(parse[0], parse[1]);
