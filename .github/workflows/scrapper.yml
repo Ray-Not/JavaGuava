@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'FP/scrapper/**'
+      - 'FP/pom.xml'
   pull_request:
     paths:
       - 'FP/scrapper/**'
@@ -24,6 +25,7 @@ jobs:
         with:
           java-version: '20'
           distribution: 'temurin'
+          cache: maven
 
       - name: Build with Maven
-        run: mvn package -pl scrapper -am
+        run: cd FP && mvn package -pl scrapper -am
