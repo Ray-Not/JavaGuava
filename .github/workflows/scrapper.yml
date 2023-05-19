@@ -12,9 +12,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    inputs:
-        distribution: ubuntu-lates
-        required: true
 
     steps:
       - name: Checkout repository
