@@ -24,6 +24,6 @@ public class ScrapperApplication {
 //                config
 //        ));
 //        notificationService.sendNotice("Вот-вот");
-//        Cannot invoke "org.springframework.amqp.rabbit.connection.ConnectionFactory.createConnection()" because "connectionFactory" is null
+////        Cannot invoke "org.springframework.amqp.rabbit.connection.ConnectionFactory.createConnection()" because "connectionFactory" is null
         }
 }
