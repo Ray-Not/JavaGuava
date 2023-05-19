@@ -1,4 +1,4 @@
-name: Scrapper CI
+name: Scrapper Build
 
 on:
   push:
