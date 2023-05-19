@@ -1,0 +1,23 @@
+name: Scrapper Build
+
+on:
+  push:
+    paths:
+      - 'scrapper/**'
+
+jobs:
+  build:
+    name: Build Scrapper
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Build Scrapper Application
+        run: mvn package -pl scrapper -am
