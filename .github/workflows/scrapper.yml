@@ -17,6 +17,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -37,8 +40,9 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
+        
+      - name: Build scrapper Docker image
+        run: cd FP && docker build -t scrapper-image -f scrapper.Dockerfile .
+        
+      - name: Push Docker image to GitHub Container Registry
+        run: docker push javaguava/scrapper:latest
