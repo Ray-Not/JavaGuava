@@ -42,7 +42,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Build scrapper Docker image
-        run: cd FP && docker build -t scrapper-image -f scrapper.Dockerfile -t ray-not/javaguava/scrapper:latest
+        run: cd FP && docker build -t scrapper-image -f scrapper.Dockerfile -t ray-not/javaguava/scrapper:latest .
         
       - name: Push Docker image to GitHub Container Registry
         run: docker push ghcr.io/ray-not/javaguava/scrapper:latest
