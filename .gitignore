@@ -29,3 +29,5 @@ FP/.idea/
 # volumes
 FP/migrations/postgres_data/
 FP/rabbitmq/
+FP/prometheus/
+FP/grafana/
