@@ -1,12 +1,13 @@
 # Compiled class file
 *.class
 
+
 # Log file
 *.log
 
 # BlueJ files
 *.ctxt
-#
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -23,4 +24,8 @@
 hs_err_pid*
 
 # idea
-.idea
+FP/.idea/
+
+# volumes
+FP/migrations/postgres_data/
+FP/rabbitmq/

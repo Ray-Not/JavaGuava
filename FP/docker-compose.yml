@@ -1,0 +1,54 @@
+version: '1.-'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: scrap_user
+      POSTGRES_PASSWORD: hard_password
+    volumes:
+      - ./migrations/postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  liquibase-migrations:
+    container_name: liquibase
+    image: liquibase/liquibase:4.18
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 10
+    command:
+      - --hub-mode=off
+      - --changelog-file=master.xml
+      - --driver=org.postgresql.Driver
+      - --url=jdbc:postgresql://postgres:5432/postgres
+      - --username=scrap_user
+      - --password=hard_password
+      - --logLevel=debug
+      - update
+    volumes:
+      - ./migrations:/liquibase/changelog
+    networks:
+      - backend
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672  # Порт для AMQP
+      - 15672:15672  # Порт для RabbitMQ Management UI
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+networks:
+  backend:
+    driver: bridge
