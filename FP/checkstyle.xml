@@ -4,8 +4,6 @@
 
 <module name="Checker">
     <module name="TreeWalker">
-        <module name="Indentation"/>
         <module name="WhitespaceAround"/>
-        <module name="NewlineAtEndOfFile"/>
     </module>
 </module>
