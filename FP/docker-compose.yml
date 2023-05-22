@@ -1,0 +1,92 @@
+version: '1.-'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15.2
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: scrap_user
+      POSTGRES_PASSWORD: hard_password
+    volumes:
+      - ./migrations/postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  liquibase-migrations:
+    container_name: liquibase
+    image: liquibase/liquibase:4.18
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+        max_attempts: 10
+    command:
+      - --hub-mode=off
+      - --changelog-file=master.xml
+      - --driver=org.postgresql.Driver
+      - --url=jdbc:postgresql://postgres:5432/postgres
+      - --username=scrap_user
+      - --password=hard_password
+      - --logLevel=debug
+      - update
+    volumes:
+      - ./migrations:/liquibase/changelog
+    networks:
+      - backend
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672  # Порт для AMQP
+      - 15672:15672  # Порт для RabbitMQ Management UI
+    volumes:
+      - ./rabbitmq:/var/lib/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    ports:
+      - 9090:9090
+    networks:
+      - metrik
+    user: root
+    security_opt:
+      - "credentialspec:file=credentialspec.toml"
+
+  grafana:
+    image: grafana/grafana-oss
+    volumes:
+      - ./grafana:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    ports:
+      - 3000:3000
+    networks:
+      - metrik
+    user: root
+    security_opt:
+      - "credentialspec:file=credentialspec.toml"
+
+
+networks:
+  backend:
+    driver: bridge
+  metrik:
+    driver: bridge
